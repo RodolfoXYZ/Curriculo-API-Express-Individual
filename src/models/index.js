@@ -6,7 +6,6 @@ const PersonalInfo = sequelize.define('PersonalInfo', {
   name: { type: DataTypes.STRING, allowNull: false },
   email: { type: DataTypes.STRING, allowNull: false },
   phone: { type: DataTypes.STRING },
-  summary: { type: DataTypes.TEXT },
 });
 
 // Resumo Profissional
