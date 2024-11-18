@@ -5,8 +5,8 @@ const router = express.Router();
 // --- Dados Pessoais ---
 router.post('/personal-info', async (req, res) => {
   try {
-    const { name, email, phone, summary } = req.body;
-    const newPersonalInfo = await PersonalInfo.create({ name, email, phone, summary });
+    const { name, email, phone } = req.body;
+    const newPersonalInfo = await PersonalInfo.create({ name, email, phone });
     res.status(201).json(newPersonalInfo);
   } catch (error) {
     res.status(500).json({ error: 'Erro ao criar dados pessoais' });
@@ -24,13 +24,12 @@ router.get('/personal-info', async (req, res) => {
 
 router.put('/personal-info/:id', async (req, res) => {
   try {
-    const { name, email, phone, summary } = req.body;
+    const { name, email, phone } = req.body;
     const personalInfo = await PersonalInfo.findByPk(req.params.id);
     if (personalInfo) {
       personalInfo.name = name || personalInfo.name;
       personalInfo.email = email || personalInfo.email;
       personalInfo.phone = phone || personalInfo.phone;
-      personalInfo.summary = summary || personalInfo.summary;
       await personalInfo.save();
       res.json(personalInfo);
     } else {
